@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config()
@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json())
 
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({message: "Welcome to the Bulk Mailer"});
+  res.status(200).json({ message: "Welcome to the Bulk Mailer" });
 });
 
 app.listen(port, () => {
