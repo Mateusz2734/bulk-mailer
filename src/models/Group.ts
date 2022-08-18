@@ -6,8 +6,8 @@ interface IGroup {
 };
 
 const groupSchema = new Schema<IGroup>({
-  name: String,
-  emails: [String],
+  name: { type: String, required: true, unique: true },
+  emails: [{ type: String, required: true }],
 });
 
 const Group = model<IGroup>("Group", groupSchema);
