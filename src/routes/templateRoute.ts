@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import Template from "../models/template.model";
 
 const router = Router();
 
@@ -8,7 +9,7 @@ router.route("/")
   })
   .delete((req, res) => {
     res.status(200).json({ message: "This will DELETE all Templates" })
-  })
+  });
 
 router.route("/:name")
   .get((req, res) => {
@@ -19,7 +20,6 @@ router.route("/:name")
     const { name } = req.params
     res.status(200).json({ message: "This will ADD specific Template", name: name })
   })
-
   .patch((req, res) => {
     const { name } = req.params
     res.status(200).json({ message: "This will UPDATE specific Template", name: name })
@@ -27,6 +27,6 @@ router.route("/:name")
   .delete((req, res) => {
     const { name } = req.params
     res.status(200).json({ message: "This will DELETE specific Template", name: name })
-  })
+  });
 
 export default router;
