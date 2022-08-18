@@ -16,7 +16,7 @@ app.use(express.json());
 // Define routes
 app.use(router);
 
-app.listen(port, async () => {
+app.listen(port, () => {
   log.info(`Server started on port ${port}.`);
   connectWithDatabase()
 });

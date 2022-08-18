@@ -1,15 +1,15 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
-interface ITemplate {
+export interface TemplateDocument extends Document {
   name: string;
   body: string;
 };
 
-const templateSchema = new Schema<ITemplate>({
+const templateSchema = new Schema<TemplateDocument>({
   name: { type: String, required: true, unique: true },
   body: { type: String, required: true },
 });
 
-const Template = model<ITemplate>("Template", templateSchema);
+const Template = model<TemplateDocument>("Template", templateSchema);
 
 export default Template;
