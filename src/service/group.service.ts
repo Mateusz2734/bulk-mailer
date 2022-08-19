@@ -9,7 +9,7 @@ export function findGroup(filter: FilterQuery<GroupDocument>, options: QueryOpti
   return Group.findOne(filter, {}, options);
 }
 
-export function deleteGroup(input: DocumentDefinition<GroupDocument>) {
+export function deleteGroup(input: FilterQuery<GroupDocument>) {
   return Group.deleteOne(input);
 }
 

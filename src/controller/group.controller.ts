@@ -6,7 +6,6 @@ import { GroupDocument } from "../models/group.model";
 
 
 export async function createGroupHandler(req: Request, res: Response) {
-  log.trace(`${req.method} /groups${req.url}`);
   const name = capitalize(req.params.name);
   const body: GroupDocument = req.body;
   try {
@@ -20,7 +19,62 @@ export async function createGroupHandler(req: Request, res: Response) {
   }
 }
 
+export async function findGroupHandler(req: Request, res: Response) {
+  const name = capitalize(req.params.name);
+  try {
+    const group = await findGroup({ name: name });
+    if (!group) {
+      res.status(404).json({ error: "Group with given name doesn't exist" });
+    } else {
+      res.status(200).json({ group: group });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      log.error(error.message);
+      res.status(500).json({ error: error.message });
+    };
+  }
+}
+
+export async function deleteGroupHandler(req: Request, res: Response) {
+  const name = capitalize(req.params.name);
+  try {
+    const info = await deleteGroup({ name: name });
+    if (info.deletedCount === 0) {
+      res.status(404).json({ error: "Group with given name wasn't deleted" });
+    } else {
+      res.status(200).json({ info: info });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      log.error(error.message);
+      res.status(500).json({ error: error.message });
+    };
+  }
+}
+
+// TODO update instead of replace
+export async function updateGroupHandler(req: Request, res: Response) {
+  const name = capitalize(req.params.name);
+  const body: GroupDocument = req.body;
+  body.name = capitalize(body.name);
+  try {
+    const group = await updateGroup({ name: name }, { ...body }, { new: true, upsert: true });
+    res.status(200).json({ group: group });
+  } catch (error) {
+    if (error instanceof Error) {
+      log.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
+  }
+}
+
 export async function findAllGroupsHandler(req: Request, res: Response) {
   const groups = await findAllGroups();
   res.status(200).json({ groups: groups });
+}
+
+export async function deleteAllGroupsHandler(req: Request, res: Response) {
+  const info = await deleteAllGroups();
+  res.status(200).json({ info: info });
 }

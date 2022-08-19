@@ -1,28 +1,18 @@
 import { Router } from 'express';
-import { createGroupHandler, findAllGroupsHandler } from "../controller/group.controller";
+import { createGroupHandler, findAllGroupsHandler, deleteAllGroupsHandler, findGroupHandler, deleteGroupHandler, updateGroupHandler } from "../controller/group.controller";
+import { trace } from "../middleware/trace";
 
 const router = Router();
 
 router.route("/")
-  .get(findAllGroupsHandler)
-  .delete((req, res) => {
-    res.status(200).json({ message: "This will DELETE all Groups" });
-  });
+  .get(trace, findAllGroupsHandler)
+  .delete(trace, deleteAllGroupsHandler);
 
 router.route("/:name")
-  .get((req, res) => {
-    const { name } = req.params;
-    res.status(200).json({ message: "This will GET specific Group", name: name });
-  })
-  .post(createGroupHandler)
+  .get(trace, findGroupHandler)
+  .post(trace, createGroupHandler)
 
-  .put((req, res) => {
-    const { name } = req.params;
-    res.status(200).json({ message: "This will UPDATE specific Group", name: name });
-  })
-  .delete((req, res) => {
-    const { name } = req.params;
-    res.status(200).json({ message: "This will DELETE specific Group", name: name });
-  });
+  .put(trace, updateGroupHandler)
+  .delete(trace, deleteGroupHandler);
 
 export default router;
