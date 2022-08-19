@@ -1,11 +1,10 @@
 import { Router } from 'express';
+import { createGroupHandler, findAllGroupsHandler } from "../controller/group.controller";
 
 const router = Router();
 
 router.route("/")
-  .get((req, res) => {
-    res.status(200).json({ message: "This will GET all Groups" });
-  })
+  .get(findAllGroupsHandler)
   .delete((req, res) => {
     res.status(200).json({ message: "This will DELETE all Groups" });
   });
@@ -15,10 +14,7 @@ router.route("/:name")
     const { name } = req.params;
     res.status(200).json({ message: "This will GET specific Group", name: name });
   })
-  .post((req, res) => {
-    const { name } = req.params;
-    res.status(200).json({ message: "This will ADD specific Group", name: name });
-  })
+  .post(createGroupHandler)
 
   .put((req, res) => {
     const { name } = req.params;
