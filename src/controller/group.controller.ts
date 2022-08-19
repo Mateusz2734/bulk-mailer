@@ -53,13 +53,16 @@ export async function deleteGroupHandler(req: Request, res: Response) {
   }
 }
 
-// TODO update instead of replace
 export async function updateGroupHandler(req: Request, res: Response) {
   const name = capitalize(req.params.name);
   const body: GroupDocument = req.body;
   body.name = capitalize(body.name);
   try {
-    const group = await updateGroup({ name: name }, { ...body }, { new: true, upsert: true });
+    const group = await updateGroup(
+      { name: name },
+      { $addToSet: { emails: { $each: body.emails } }, name: body.name },
+      { new: true, upsert: true }
+    );
     res.status(200).json({ group: group });
   } catch (error) {
     if (error instanceof Error) {
