@@ -1,26 +1,26 @@
 import { DocumentDefinition, FilterQuery, UpdateQuery, QueryOptions, } from "mongoose";
 import Template, { TemplateDocument } from "../models/template.model";
 
-export function createGroup(input: DocumentDefinition<TemplateDocument>) {
+export function createTemplate(input: DocumentDefinition<TemplateDocument>) {
   return Template.create(input);
 }
 
-export function findGroup(filter: FilterQuery<TemplateDocument>, options: QueryOptions = { lean: true }) {
+export function findTemplate(filter: FilterQuery<TemplateDocument>, options: QueryOptions = { lean: true }) {
   return Template.findOne(filter, {}, options);
 }
 
-export function deleteGroup(input: DocumentDefinition<TemplateDocument>) {
+export function deleteTemplate(input: FilterQuery<TemplateDocument>) {
   return Template.deleteOne(input);
 }
 
-export function updateGroup(filter: QueryOptions<TemplateDocument>, update: UpdateQuery<TemplateDocument>, options: QueryOptions) {
+export function updateTemplate(filter: QueryOptions<TemplateDocument>, update: UpdateQuery<TemplateDocument>, options: QueryOptions) {
   return Template.findOneAndUpdate(filter, update, options);
 }
 
-export function findAllGroups() {
+export function findAllTemplates() {
   return Template.find({});
 }
 
-export function deleteAllGroups() {
+export function deleteAllTemplates() {
   return Template.deleteMany({});
 }
