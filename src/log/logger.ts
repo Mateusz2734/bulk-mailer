@@ -1,7 +1,9 @@
 import logger from "pino";
 import dayjs from "dayjs";
+import config from "../config/default";
 
 const log = logger({
+  level: config.pino_log_level || "info",
   transport: {
     target: 'pino-pretty',
     options: {

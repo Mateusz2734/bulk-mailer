@@ -1,13 +1,12 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import config from "./config/default";
 import router from "./router";
 import log from "./log/logger";
 import { connectWithDatabase } from "./db/connect";
 import cors from "cors";
 
-dotenv.config();
 
-const port = process.env.PORT as string || 3000;
+const port = config.port || 3000;
 
 const app = express();
 
