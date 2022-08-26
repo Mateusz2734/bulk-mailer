@@ -13,7 +13,7 @@ export async function createTemplateHandler(req: Request, res: Response) {
   } catch (error) {
     if (error instanceof Error) {
       log.error(error.message);
-      res.status(409).json({ error: "Group with given name already exists" });
+      res.status(409).json({ error: "Template with given name already exists" });
     };
   }
 }
