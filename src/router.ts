@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import groupRoute from "./routes/groupRoute"
-import templateRoute from "./routes/templateRoute"
-import mainRoute from "./routes/mainRoute"
+import groupRoute from "./routes/groupRoute";
+import templateRoute from "./routes/templateRoute";
+import mainRoute from "./routes/mainRoute";
+import mailRoute from "./routes/mailRoute";
 
 
 const router = Router();
 
-router.use("/", mainRoute)
+router.use("/", mainRoute);
+router.use("/mail", mailRoute);
 router.use("/groups", groupRoute);
 router.use("/templates", templateRoute);
 
