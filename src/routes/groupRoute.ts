@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { createGroupHandler, findAllGroupsHandler, deleteAllGroupsHandler, findGroupHandler, deleteGroupHandler, updateGroupHandler } from "../controller/group.controller";
 import { trace } from "../middleware/trace";
 
-const router = Router();
+const router: Router = Router();
 
 router.route("/")
   .get(trace, findAllGroupsHandler)
@@ -11,7 +11,6 @@ router.route("/")
 router.route("/:name")
   .get(trace, findGroupHandler)
   .post(trace, createGroupHandler)
-
   .put(trace, updateGroupHandler)
   .delete(trace, deleteGroupHandler);
 

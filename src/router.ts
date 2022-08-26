@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import groupRoute from "./routes/groupRoute";
 import templateRoute from "./routes/templateRoute";
+import groupRoute from "./routes/groupRoute";
 import mainRoute from "./routes/mainRoute";
 import mailRoute from "./routes/mailRoute";
 
 
-const router = Router();
+const router: Router = Router();
 
 router.use("/", mainRoute);
 router.use("/mail", mailRoute);

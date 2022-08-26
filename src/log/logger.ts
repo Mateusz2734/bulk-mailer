@@ -13,7 +13,7 @@ const log = logger({
   base: {
     pid: false,
   },
-  timestamp: () => `,"time":"${dayjs().format("YYYY-MM-DDTHH:mm:ssZ[Z]")}"`
+  timestamp: (): string => `,"time":"${dayjs().format("YYYY-MM-DDTHH:mm:ssZ[Z]")}"`
 });
 
 export default log;

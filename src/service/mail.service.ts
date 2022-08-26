@@ -1,7 +1,6 @@
-import config from "../config/default";
 import sendMsg, { MailDataRequired, setApiKey, send } from '@sendgrid/mail';
 import { TemplateDocument } from "../models/template.model";
-import log from "../log/logger";
+import config from "../config/default";
 
 export async function sendMail(template: TemplateDocument, to_email: string) {
   sendMsg.setApiKey(config.sendgrid_api_key);

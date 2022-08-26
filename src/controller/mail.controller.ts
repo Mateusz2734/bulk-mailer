@@ -1,10 +1,10 @@
-import { sendMail } from "../service/mail.service";
 import { Request, Response } from "express";
-import log from "../log/logger";
-import { GroupDocument } from "../models/group.model";
 import { TemplateDocument } from "../models/template.model";
+import { GroupDocument } from "../models/group.model";
+import { sendMail } from "../service/mail.service";
+import log from "../log/logger";
 
-export async function sendMailHandler(req: Request, res: Response) {
+export async function sendMailHandler(req: Request, res: Response): Promise<void> {
   const group: GroupDocument = req.body.group;
   const template: TemplateDocument = req.body.template;
   let errorsCount: number = 0;

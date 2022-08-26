@@ -1,12 +1,12 @@
-import { createGroup, findGroup, deleteGroup, updateGroup, findAllGroups, deleteAllGroups } from "../service/group.service";
 import { Request, Response } from "express";
-import log from "../log/logger";
 import { capitalize } from "lodash";
+import { createGroup, findGroup, deleteGroup, updateGroup, findAllGroups, deleteAllGroups } from "../service/group.service";
 import { GroupDocument } from "../models/group.model";
+import log from "../log/logger";
 
 
-export async function createGroupHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function createGroupHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   const body: GroupDocument = req.body;
   try {
     const group = await createGroup({ ...body, name: name });
@@ -19,8 +19,8 @@ export async function createGroupHandler(req: Request, res: Response) {
   }
 }
 
-export async function findGroupHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function findGroupHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   try {
     const group = await findGroup({ name: name });
     if (!group) {
@@ -36,8 +36,8 @@ export async function findGroupHandler(req: Request, res: Response) {
   }
 }
 
-export async function deleteGroupHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function deleteGroupHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   try {
     const info = await deleteGroup({ name: name });
     if (info.deletedCount === 0) {
@@ -53,8 +53,8 @@ export async function deleteGroupHandler(req: Request, res: Response) {
   }
 }
 
-export async function updateGroupHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function updateGroupHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   const body: GroupDocument = req.body;
   body.name = capitalize(body.name);
   try {
@@ -72,12 +72,12 @@ export async function updateGroupHandler(req: Request, res: Response) {
   }
 }
 
-export async function findAllGroupsHandler(req: Request, res: Response) {
+export async function findAllGroupsHandler(req: Request, res: Response): Promise<void> {
   const groups = await findAllGroups();
   res.status(200).json({ groups: groups });
 }
 
-export async function deleteAllGroupsHandler(req: Request, res: Response) {
+export async function deleteAllGroupsHandler(req: Request, res: Response): Promise<void> {
   const info = await deleteAllGroups();
   res.status(200).json({ info: info });
 }

@@ -1,11 +1,11 @@
-import { createTemplate, findTemplate, deleteTemplate, updateTemplate, findAllTemplates, deleteAllTemplates } from "../service/template.service";
 import { Request, Response } from "express";
-import log from "../log/logger";
 import { capitalize } from "lodash";
+import { createTemplate, findTemplate, deleteTemplate, updateTemplate, findAllTemplates, deleteAllTemplates } from "../service/template.service";
 import { TemplateDocument } from "../models/template.model";
+import log from "../log/logger";
 
-export async function createTemplateHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function createTemplateHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   const body: TemplateDocument = req.body;
   try {
     const template = await createTemplate({ ...body, name: name });
@@ -18,8 +18,8 @@ export async function createTemplateHandler(req: Request, res: Response) {
   }
 }
 
-export async function findTemplateHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function findTemplateHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   try {
     const template = await findTemplate({ name: name });
     if (!template) {
@@ -35,8 +35,8 @@ export async function findTemplateHandler(req: Request, res: Response) {
   }
 }
 
-export async function deleteTemplateHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function deleteTemplateHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   try {
     const info = await deleteTemplate({ name: name });
     if (info.deletedCount === 0) {
@@ -52,8 +52,8 @@ export async function deleteTemplateHandler(req: Request, res: Response) {
   }
 }
 
-export async function updateTemplateHandler(req: Request, res: Response) {
-  const name = capitalize(req.params.name);
+export async function updateTemplateHandler(req: Request, res: Response): Promise<void> {
+  const name: string = capitalize(req.params.name);
   const body: TemplateDocument = req.body;
   body.name = capitalize(body.name);
   try {
@@ -79,12 +79,12 @@ export async function updateTemplateHandler(req: Request, res: Response) {
   }
 }
 
-export async function findAllTemplatesHandler(req: Request, res: Response) {
+export async function findAllTemplatesHandler(req: Request, res: Response): Promise<void> {
   const templates = await findAllTemplates();
   res.status(200).json({ templates: templates });
 }
 
-export async function deleteAllTemplatesHandler(req: Request, res: Response) {
+export async function deleteAllTemplatesHandler(req: Request, res: Response): Promise<void> {
   const info = await deleteAllTemplates();
   res.status(200).json({ info: info });
 }

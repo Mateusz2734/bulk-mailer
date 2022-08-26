@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { createTemplateHandler, findAllTemplatesHandler, deleteAllTemplatesHandler, findTemplateHandler, deleteTemplateHandler, updateTemplateHandler } from "../controller/template.controller";
 import { trace } from "../middleware/trace";
 
-const router = Router();
+const router: Router = Router();
 
 router.route("/")
   .get(trace, findAllTemplatesHandler)
